@@ -1,15 +1,15 @@
 - name: PLAY1
-  hosts: local
+  hosts: local 
   connection: local # managing its own node, no need of credentials
-  tasks:
+  tasks: 
   - name: PLAY1 and TASK1
     ansible.builtin.debug:
-      msg: "Hello from PLAY1 and TASK1"
+      msg: "Hello from PLAY1 aws TASK1"
 
-- name: PLAY2
-  hosts: local
+- name: PLAY12
+  hosts: local 
   connection: local # managing its own node, no need of credentials
-  tasks:
-  - name: PLAY1 and TASK1
+  tasks: 
+  - name: PLAY2 and TASK1
     ansible.builtin.debug:
-      msg: "Hello from PLAY2 and TASK1"
+      msg: "Hello from PLAY2 aws TASK1"
