@@ -2,6 +2,12 @@
   hosts: local
   connection: local
   tasks:
-  - name: handie undefine variable
+  - name: handle undefine variable
     ansible.builtin.debug:
       msg: "Hello {{ person | default('Ramesh') }}"
+
+  - name: convert string to list
+    vars:
+      fruits: "apple, banana, orange" #String
+    ansible.builtin.debug:
+      msg: " fruits are: {{ fruits | split(',') }}"  
