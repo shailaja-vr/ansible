@@ -33,7 +33,7 @@
   #   ansible.builtin.debug:
   #     msg: "{{ ec2_info }}"
 
-  - name: print private Ip addresses
+  - name: print private IP addresses
     ansible.builtin.debug:
       msg: "{{ item.instances[0].private_ip_address }}"
     loop: "{{ ec2_info.results }}"
@@ -42,10 +42,23 @@
     amazon.aws.route53:
       state: present
       zone: "{{ zone }}"
-      record: "{{ item.item}}.{{ zone }}"
+      record: "{{ zone }}"
+      type: A
+      ttl: 1
+      value: "{{ item.instances[0].public_ip_address }}"
+      wait: true
+      overwrite: true
+    loop: "{{ ec2_info.results }}"
+
+  - name: create public ip for frontend
+    amazon.aws.route53:
+      state: present
+      zone: "{{ zone }}"
+      record: "{{ zone }}"
       type: A
       ttl: 1
       value: "{{ item.instances[0].private_ip_address }}"
       wait: true
       overwrite: true
-    loop: "{{ ec2_info.results }}"  
+    loop: "{{ ec2_info.results }}"
+    when: item.item == "forntend"
