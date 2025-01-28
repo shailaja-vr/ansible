@@ -1,4 +1,4 @@
-- name ec2 and r53 records
+- name: create ec2 and r53 records
   connection: local
   hosts: local
   vars: 
